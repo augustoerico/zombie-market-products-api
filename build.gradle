@@ -2,9 +2,19 @@ group 'io.github.augustoerico'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'groovy'
+apply plugin: 'application'
 
 repositories {
     mavenCentral()
+}
+
+mainClassName = 'io.github.augustoerico.Application'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Zombie Market - Products API',
+                'Implementation-Version': version
+    }
 }
 
 dependencies {
