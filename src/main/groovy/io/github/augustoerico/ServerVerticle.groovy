@@ -2,6 +2,7 @@ package io.github.augustoerico
 
 import io.github.augustoerico.config.Env
 import io.github.augustoerico.routes.HealthRouter
+import io.github.augustoerico.routes.ProductRouter
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Future
 import io.vertx.ext.web.Router
@@ -13,6 +14,7 @@ class ServerVerticle extends AbstractVerticle {
         Router router = Router.router(vertx)
 
         HealthRouter.create(router).route()
+        ProductRouter.create(router).route()
 
         vertx.createHttpServer()
                 .requestHandler(router.&accept)
