@@ -8,7 +8,7 @@ class Env {
     }
 
     static address() {
-        System.getenv().ADDRESS ?: '0.0.0.0'
+        System.getenv().ADDRESS ?: '127.0.0.1'
     }
 
 }
