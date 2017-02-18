@@ -12,8 +12,16 @@ class ServerVerticle extends AbstractVerticle {
                 .requestHandler { req ->
             req.response().end('Hello, world')
         }
-                .listen(Env.port(), Env.address())
-        future.complete()
+                .listen(Env.port(), Env.address()) { result ->
+            if (result.succeeded()) {
+                println "Server running on http://${Env.address()}:${Env.port()}"
+                future.complete()
+            } else {
+                def ex = result.cause()
+                ex.printStackTrace()
+                future.fail(ex)
+            }
+        }
     }
 
 }
