@@ -11,6 +11,9 @@ class Env {
         System.getenv().ADDRESS ?: '0.0.0.0'
     }
 
+    /**
+     * Mongo DB
+     */
     static mongoDbUri() {
         System.getenv().MONGO_DB_URI ?:
                 'mongodb://zombie-market-user:zombie-market-password@ds023480.mlab.com:23480/zombie-market-db'
@@ -18,6 +21,10 @@ class Env {
 
     static mongoDbName() {
         System.getenv().MONGO_DB_NAME ?: 'zombie-market-db'
+    }
+
+    static productsCollection() {
+        System.getenv().PRODUCTS_COLLECTION ?: 'PRODUCTS'
     }
 
     /**

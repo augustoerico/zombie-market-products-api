@@ -31,7 +31,7 @@ class RepositoryTest extends Specification {
         def product = new Product([name: 'Hand', price: 4.99])
 
         when:
-        repository.save('PRODUCT', product.asJson()) {
+        repository.save(Env.productsCollection(), product.asJson()) {
             async.evaluate { true }
         }
 
@@ -43,7 +43,7 @@ class RepositoryTest extends Specification {
         def async = new AsyncConditions()
 
         when:
-        repository.find('PRODUCT') {
+        repository.find(Env.productsCollection()) {
             async.evaluate { true }
         }
 

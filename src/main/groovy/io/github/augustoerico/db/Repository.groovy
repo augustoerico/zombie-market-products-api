@@ -36,4 +36,9 @@ class Repository {
         this
     }
 
+    def findOne(String collection, String id, Handler handler) {
+        def query = new JsonObject().put('_id', id)
+        client.findOne(collection, query, new JsonObject(), handler)
+    }
+
 }
