@@ -33,13 +33,7 @@ class ProductRepository {
                 .put('connection_string', Env.mongoDbUri())
                 .put('db_name', Env.mongoDbName())
 
-        println json
-
-        def client = MongoClient.createShared(vertx, json)
-
-        println client.toString()
-
-        instance = new ProductRepository(client)
+        instance = new ProductRepository(MongoClient.createShared(vertx, json))
     }
     static instance() {
         if (!instance) {
