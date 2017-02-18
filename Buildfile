@@ -1,1 +1,1 @@
-build: ./gradlew clean installDist
+stage: ./gradlew clean installDist
