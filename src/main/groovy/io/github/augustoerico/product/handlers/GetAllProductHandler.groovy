@@ -1,4 +1,4 @@
-package io.github.augustoerico.products
+package io.github.augustoerico.product.handlers
 
 import groovy.json.JsonOutput
 import io.vertx.ext.web.RoutingContext
