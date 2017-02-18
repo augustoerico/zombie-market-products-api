@@ -4,14 +4,15 @@ import io.vertx.core.json.JsonObject
 
 class Product {
 
-    def id
+    def _id
     def name
     def price
 
     def asJson() {
-        new JsonObject()
-                .put('id', id)
-                .put('name', name)
-                .put('price', price as double)
+        def obj = new JsonObject()
+        _id ? obj.put('_id', _id) : null
+        name ? obj.put('name', name) : null
+        price ? obj.put('price', price as double) : null
+        obj
     }
 }

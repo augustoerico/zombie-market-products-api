@@ -17,8 +17,15 @@ class Env {
     }
 
     static mongoDbName() {
-        System.getenv().MONGO_DB_NAME ?:
-                'zombie-market-db'
+        System.getenv().MONGO_DB_NAME ?: 'zombie-market-db'
+    }
+
+    /**
+     * Tests
+     */
+    static Double testWaitTime() {
+        def time = System.getenv().TEST_WAIT_TIME ?: '5.0'
+        Double.parseDouble(time)
     }
 
 }
