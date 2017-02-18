@@ -5,6 +5,7 @@ import io.github.augustoerico.product.handlers.GetAllProductHandler
 import io.github.augustoerico.product.handlers.GetProductHandler
 import io.vertx.core.http.HttpMethod
 import io.vertx.ext.web.Router
+import io.vertx.ext.web.handler.BodyHandler
 
 class ProductRouter {
 
@@ -15,9 +16,10 @@ class ProductRouter {
     }
 
     def route() {
-        router.route(HttpMethod.GET, '/products').handler GetAllProductHandler.handler
-        router.route(HttpMethod.POST, '/products').handler CreateProductHandler.handler
-        router.route(HttpMethod.GET, '/products/:id').handler GetProductHandler.handler
+        router.route().handler(BodyHandler.create())
+        router.get('/products').handler GetAllProductHandler.handler
+        router.get('/products/:id').handler GetProductHandler.handler
+        router.post('/products').handler CreateProductHandler.handler
     }
 
     static create(Router router) {
