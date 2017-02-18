@@ -1,21 +1,32 @@
 package io.github.augustoerico.product.handlers
 
-import groovy.json.JsonOutput
+import io.github.augustoerico.db.Repository
+import io.vertx.core.Future
+import io.vertx.core.http.HttpServerResponse
 import io.vertx.ext.web.RoutingContext
 
 class GetAllProductHandler {
 
-    // TODO remove this kebab
-    static products = [
-            [id: 1, description: 'A generic item', price: 1.0],
-            [id: 2, description: 'Kebab', price: 2.89],
-            [id: 3, description: 'Another one', price: 10.9]
-    ]
+    static final String PRODUCT_COLLECTION = 'PRODUCT'
 
     static handler = { RoutingContext context ->
+        println '[GET] on /products'
+
         def response = context.response()
-        response.putHeader('content-type', 'application/json')
-                .end(JsonOutput.toJson(products))
+        Repository.create(context.vertx())
+                .find(PRODUCT_COLLECTION, handleResult.curry(response))
+    }
+
+    static handleResult = { HttpServerResponse response, Future future ->
+
+        if (future.succeeded()) {
+            def result = future.result()
+            response.putHeader('content-type', 'application/json')
+                    .end(result.toString())
+        } else {
+            response.setStatusCode(500).end()
+        }
+
     }
 
 }
