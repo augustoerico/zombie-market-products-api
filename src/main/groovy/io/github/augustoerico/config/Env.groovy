@@ -16,11 +16,13 @@ class Env {
      */
     static mongoDbUri() {
         System.getenv().MONGO_DB_URI ?:
-                'mongodb://zombie-market-user:zombie-market-password@ds023480.mlab.com:23480/zombie-market-db'
+//                'mongodb://zombie-market-user:zombie-market-password@ds023480.mlab.com:23480/zombie-market-db'
+                'mongodb://localhost:12345'
     }
 
     static mongoDbName() {
-        System.getenv().MONGO_DB_NAME ?: 'zombie-market-db'
+//        System.getenv().MONGO_DB_NAME ?: 'zombie-market-db'
+        'db-name'
     }
 
     static productsCollection() {

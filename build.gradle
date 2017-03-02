@@ -25,6 +25,9 @@ dependencies {
 
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
 
+    // Embedded MongoDB
+    testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.0.0'
+
     // Spock
     testCompile 'org.spockframework:spock-core:1.1-groovy-2.4-rc-3'
 }
