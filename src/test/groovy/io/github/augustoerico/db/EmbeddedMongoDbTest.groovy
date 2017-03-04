@@ -1,6 +1,5 @@
 package io.github.augustoerico.db
 
-import com.mongodb.async.client.MongoClient
 import de.flapdoodle.embed.mongo.MongodExecutable
 import de.flapdoodle.embed.mongo.MongodStarter
 import de.flapdoodle.embed.mongo.config.IMongodConfig
