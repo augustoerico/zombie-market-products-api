@@ -8,11 +8,6 @@ class Product {
     def name
     def price
 
-    Product(Map map) {
-        this.name = map.name
-        this.price = map.price
-    }
-
     def asJson() {
         def obj = new JsonObject()
         _id ? obj.put('_id', _id) : null
