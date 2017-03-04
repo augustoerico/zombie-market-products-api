@@ -1,50 +1,13 @@
 package io.github.augustoerico.api
 
-import de.flapdoodle.embed.mongo.MongodExecutable
-import groovyx.net.http.RESTClient
 import io.github.augustoerico.config.Env
-import io.github.augustoerico.db.Repository
 import io.github.augustoerico.product.model.Product
 import io.vertx.core.Future
-import io.vertx.core.Vertx
-import spock.lang.Shared
-import spock.lang.Specification
 import spock.util.concurrent.BlockingVariables
 
 import java.util.concurrent.TimeUnit
 
-class CreateProductTest extends Specification {
-
-    @Shared
-    Vertx vertx
-
-    @Shared
-    MongodExecutable executable
-
-    @Shared
-    RESTClient client
-
-    @Shared
-    Repository repository
-
-    def setup() {
-        vertx = Vertx.vertx()
-
-        ProductTestHelper.setupServer(vertx)
-
-        executable = ProductTestHelper.getMongodExecutable()
-        executable.start()
-
-        repository = Repository.create(vertx).getInstance()
-
-        client = new RESTClient('http://localhost:3000')
-        client.setContentType('application/json')
-    }
-
-    def cleanup() {
-        executable.stop()
-        vertx.close()
-    }
+class CreateProductTest extends ProductTest {
 
     def 'It should create a product'() {
         def vars = new BlockingVariables(Env.testWaitTime() as int, TimeUnit.SECONDS)
