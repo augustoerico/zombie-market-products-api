@@ -1,4 +1,4 @@
-package io.github.augustoerico.api
+package io.github.augustoerico.api.product
 
 import io.github.augustoerico.config.Env
 import io.github.augustoerico.product.model.Product
@@ -7,7 +7,12 @@ import spock.util.concurrent.BlockingVariables
 
 import java.util.concurrent.TimeUnit
 
-class CreateProductTest extends ProductTest {
+class CreateProductApiSpec extends ProductApiSpec {
+
+    @Override
+    setupContext() {
+        load()
+    }
 
     def 'Should create a product'() {
         def vars = new BlockingVariables(Env.testWaitTime() as int, TimeUnit.SECONDS)
