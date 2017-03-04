@@ -18,12 +18,12 @@ class ServerVerticle extends AbstractVerticle {
 
         vertx.createHttpServer()
                 .requestHandler(router.&accept)
-                .listen(Env.port(), Env.address(), handleResult.curry(future))
+                .listen(Env.port(), Env.host(), handleResult.curry(future))
     }
 
     def handleResult = { Future future, result ->
         if (result.succeeded()) {
-            println "Server running on http://${Env.address()}:${Env.port()}"
+            println "Server running on ${Env.appUrl()}"
             future.complete()
         } else {
             def ex = result.cause()

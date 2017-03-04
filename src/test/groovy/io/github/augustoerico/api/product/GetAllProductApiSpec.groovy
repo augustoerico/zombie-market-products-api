@@ -16,6 +16,7 @@ class GetAllProductApiSpec extends ProductApiSpec {
         then:
         response.status == 200
         response.responseData.size() == 3
+        response.responseData.sort { a, b -> a._id <=> b._id } // sorting as fixture
         response.responseData.get(0) == Fixture.PRODUCTS[0]
         response.responseData.get(1) == Fixture.PRODUCTS[1]
         response.responseData.get(2) == Fixture.PRODUCTS[2]

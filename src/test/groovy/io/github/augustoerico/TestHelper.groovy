@@ -1,13 +1,11 @@
 package io.github.augustoerico
 
-import de.flapdoodle.embed.mongo.MongodExecutable
 import de.flapdoodle.embed.mongo.MongodStarter
 import de.flapdoodle.embed.mongo.config.IMongodConfig
 import de.flapdoodle.embed.mongo.config.MongodConfigBuilder
 import de.flapdoodle.embed.mongo.config.Net
 import de.flapdoodle.embed.mongo.distribution.Version
 import de.flapdoodle.embed.process.runtime.Network
-import io.github.augustoerico.ServerVerticle
 import io.github.augustoerico.config.Env
 import io.vertx.core.Vertx
 import spock.util.concurrent.AsyncConditions
@@ -25,8 +23,8 @@ class TestHelper {
     static getMongodExecutable() {
         MongodStarter starter = MongodStarter.getDefaultInstance()
 
-        String bindIp = 'localhost'
-        int port = 12345
+        String bindIp = Env.mongoDbHost()
+        int port = Env.mongoDbPort()
 
         IMongodConfig mongodConfig = new MongodConfigBuilder()
                 .version(Version.Main.PRODUCTION)

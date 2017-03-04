@@ -32,7 +32,7 @@ abstract class ProductApiSpec extends Specification {
 
         repository = Repository.create(vertx).getInstance()
 
-        client = new RESTClient('http://localhost:3000')
+        client = new RESTClient(Env.appUrl())
         client.setContentType('application/json')
 
         setupContext()

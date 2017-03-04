@@ -7,22 +7,32 @@ class Env {
         Integer.parseInt(port)
     }
 
-    static address() {
-        System.getenv().ADDRESS ?: '0.0.0.0'
+    static host() {
+        System.getenv().HOST ?: '127.0.0.1'
+    }
+
+    static appUrl() {
+        System.getenv().APP_URL ?: "http://${host()}:${port()}"
     }
 
     /**
      * Mongo DB
      */
+    static mongoDbHost() {
+        System.getenv().MONGO_DB_HOST ?: host()
+    }
+
+    static mongoDbPort() {
+        def port = System.getenv().MONGO_DB_PORT ?: '12345'
+        Integer.parseInt(port)
+    }
+
     static mongoDbUri() {
-        System.getenv().MONGO_DB_URI ?:
-//                'mongodb://zombie-market-user:zombie-market-password@ds023480.mlab.com:23480/zombie-market-db'
-                'mongodb://localhost:12345'
+        System.getenv().MONGO_DB_URI ?: "mongodb://${host()}:${mongoDbPort()}"
     }
 
     static mongoDbName() {
-//        System.getenv().MONGO_DB_NAME ?: 'zombie-market-db'
-        'db-name'
+        System.getenv().MONGO_DB_NAME ?: 'db-name'
     }
 
     static productsCollection() {
