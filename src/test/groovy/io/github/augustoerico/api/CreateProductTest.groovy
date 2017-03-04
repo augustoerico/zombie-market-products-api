@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 class CreateProductTest extends ProductTest {
 
-    def 'It should create a product'() {
+    def 'Should create a product'() {
         def vars = new BlockingVariables(Env.testWaitTime() as int, TimeUnit.SECONDS)
 
         given:

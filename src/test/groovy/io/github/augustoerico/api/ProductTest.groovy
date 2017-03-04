@@ -2,6 +2,7 @@ package io.github.augustoerico.api
 
 import de.flapdoodle.embed.mongo.MongodExecutable
 import groovyx.net.http.RESTClient
+import io.github.augustoerico.TestHelper
 import io.github.augustoerico.db.Repository
 import io.vertx.core.Vertx
 import spock.lang.Shared
@@ -9,24 +10,20 @@ import spock.lang.Specification
 
 class ProductTest extends Specification {
 
-    @Shared
     Vertx vertx
-
-    @Shared
     MongodExecutable executable
 
     @Shared
     RESTClient client
-
     @Shared
     Repository repository
 
     def setup() {
         vertx = Vertx.vertx()
 
-        ProductTestHelper.setupServer(vertx)
+        TestHelper.setupServer(vertx)
 
-        executable = ProductTestHelper.getMongodExecutable()
+        executable = TestHelper.getMongodExecutable()
         executable.start()
 
         repository = Repository.create(vertx).getInstance()

@@ -1,4 +1,4 @@
-package io.github.augustoerico.api
+package io.github.augustoerico
 
 import de.flapdoodle.embed.mongo.MongodExecutable
 import de.flapdoodle.embed.mongo.MongodStarter
@@ -12,7 +12,7 @@ import io.github.augustoerico.config.Env
 import io.vertx.core.Vertx
 import spock.util.concurrent.AsyncConditions
 
-class ProductTestHelper {
+class TestHelper {
 
     static setupServer(Vertx vertx) {
         def async = new AsyncConditions()

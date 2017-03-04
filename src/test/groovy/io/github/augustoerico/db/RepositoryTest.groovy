@@ -1,8 +1,10 @@
 package io.github.augustoerico.db
 
-import io.github.augustoerico.ServerVerticle
+import de.flapdoodle.embed.mongo.MongodExecutable
+import io.github.augustoerico.TestHelper
 import io.github.augustoerico.config.Env
 import io.github.augustoerico.product.model.Product
+import io.vertx.core.Future
 import io.vertx.core.Vertx
 import spock.lang.Shared
 import spock.lang.Specification
@@ -10,18 +12,27 @@ import spock.util.concurrent.AsyncConditions
 
 class RepositoryTest extends Specification {
 
+    /**
+     * TODO: this integration is incomplete. It should use de MongoClient to load and read data.
+     */
+
+    Vertx vertx
+    MongodExecutable executable
+
     @Shared
     Repository repository
 
-    def setupSpec() {
-        def async = new AsyncConditions()
+    def setup() {
+        vertx = Vertx.vertx()
+        repository = Repository.create(vertx).getInstance()
 
-        def vertx = Vertx.vertx()
-        vertx.deployVerticle(ServerVerticle.name) {
-            repository = Repository.create(vertx).instance
-            async.evaluate { true }
-        }
-        async.await(Env.testWaitTime())
+        executable = TestHelper.getMongodExecutable()
+        executable.start()
+    }
+
+    def cleanup() {
+        executable.stop()
+        vertx.close()
     }
 
     def 'Should save a product'() {
@@ -43,7 +54,7 @@ class RepositoryTest extends Specification {
         def async = new AsyncConditions()
 
         when:
-        repository.find(Env.productsCollection()) {
+        repository.find(Env.productsCollection()) { Future future ->
             async.evaluate { true }
         }
 
