@@ -21,7 +21,6 @@ class CreateProductHandler {
 
     static handleResult = { HttpServerResponse response, Product product, Future future ->
 
-        response.putHeader('Access-Control-Allow-Origin', '*')
         if (future.succeeded()) {
             product.set_id(future.result())
             response.setStatusCode(201).end(product.asJson().encodePrettily())
