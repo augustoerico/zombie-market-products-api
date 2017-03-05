@@ -20,7 +20,7 @@ class GetProductHandler {
 
     static handleResult = { HttpServerResponse response, Future future ->
 
-        response.putHeader('Access-Control-Allow-Origin', '')
+        response.putHeader('Access-Control-Allow-Origin', '*')
         if (future.succeeded()) {
             def result = future.result()
             result ?
