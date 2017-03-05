@@ -7,7 +7,7 @@ import io.vertx.core.AbstractVerticle
 import io.vertx.core.Future
 import io.vertx.core.http.HttpMethod
 import io.vertx.ext.web.Router
-import io.vertx.groovy.ext.web.handler.CorsHandler
+import io.vertx.ext.web.handler.CorsHandler
 
 class ServerVerticle extends AbstractVerticle {
 
@@ -16,9 +16,9 @@ class ServerVerticle extends AbstractVerticle {
         Router router = Router.router(vertx)
 
         def cors = CorsHandler.create('*')
-                .allowedMethod(HttpMethod.GET)
-                .allowedMethod(HttpMethod.POST)
-                .allowedHeader('Content-Type')
+            .allowedMethod(HttpMethod.GET)
+            .allowedMethod(HttpMethod.POST)
+            .allowedMethod(HttpMethod.OPTIONS)
 
         router.route().handler(cors)
 
