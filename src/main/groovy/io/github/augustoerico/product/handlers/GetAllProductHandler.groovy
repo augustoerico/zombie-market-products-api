@@ -18,10 +18,10 @@ class GetAllProductHandler {
 
     static handleResult = { HttpServerResponse response, Future future ->
 
+        response.putHeader('Access-Control-Allow-Origin', '')
         if (future.succeeded()) {
             def result = future.result()
-            response.putHeader('content-type', 'application/json')
-                    .end(result.toString())
+            response.putHeader('content-type', 'application/json').end(result.toString())
         } else {
             future.cause().printStackTrace()
             response.setStatusCode(500).end(future.cause().message)
