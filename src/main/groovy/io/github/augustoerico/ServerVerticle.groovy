@@ -19,6 +19,7 @@ class ServerVerticle extends AbstractVerticle {
             .allowedMethod(HttpMethod.GET)
             .allowedMethod(HttpMethod.POST)
             .allowedMethod(HttpMethod.OPTIONS)
+            .allowedHeader('Content-Type')
 
         router.route().handler(cors)
 
